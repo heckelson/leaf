@@ -2,7 +2,7 @@ if __name__ == "__main__":
     from crypt import generate_salt, hash_password
     from random import sample
 
-    from db import Donation, Role, Tree, TreeStatus, User, get_engine
+    from db import Donation, Role, Tree, TreeStatus, User, Vote, get_engine
     from generators import generate_username
     from sqlalchemy.orm import Session
 
@@ -31,7 +31,13 @@ if __name__ == "__main__":
         Tree(id=4, xpos=48.208426, ypos=16.374076, status=TreeStatus.POTENTIAL),
         Tree(id=5, xpos=48.20819, ypos=16.370916, status=TreeStatus.POTENTIAL),
         Tree(id=6, xpos=48.20819, ypos=16.370916, status=TreeStatus.POTENTIAL),
-        Tree(id=7, xpos=48.209399, ypos=16.373164, status=TreeStatus.POTENTIAL),
+        Tree(
+            id=7,
+            xpos=48.209399,
+            ypos=16.373164,
+            status=TreeStatus.POTENTIAL,
+            sponsor="Autofahrer",
+        ),
     ]
 
     donations = [
@@ -57,6 +63,11 @@ if __name__ == "__main__":
         ),
     ]
 
+    votes = [
+        Vote(user_username=user.username, tree_id=tree.id)
+        for user, tree in sample(list(zip(users, trees)), 5)
+    ]
+
     with Session(engine) as session:
         for user in users:
             print(f"Adding user {user} to db.")
@@ -69,5 +80,9 @@ if __name__ == "__main__":
         for donation in donations:
             print(f"Adding donation {donation} to db.")
             session.add(donation)
+
+        for vote in votes:
+            print(f"Adding vote {vote} to db.")
+            session.add(vote)
 
         session.commit()

@@ -45,6 +45,8 @@ class User(Base):
 
     donations: Mapped[List["Donation"]] = relationship(back_populates="user")
 
+    votes: Mapped[List["Vote"]] = relationship(back_populates="user")
+
 
 class Tree(Base):
     __tablename__ = "tree"
@@ -58,6 +60,8 @@ class Tree(Base):
     donations: Mapped[List["Donation"]] = relationship(back_populates="tree")
     sponsor: Mapped[Optional[str]] = mapped_column(default=None)
 
+    votes: Mapped[List["Vote"]] = relationship(back_populates="tree")
+
 
 class Donation(Base):
     __tablename__ = "donation"
@@ -70,6 +74,18 @@ class Donation(Base):
 
     user_username: Mapped[User] = mapped_column(ForeignKey("user.username"))
     user: Mapped[User] = relationship(back_populates="donations")
+
+
+class Vote(Base):
+    __tablename__ = "vote"
+
+    user_username: Mapped[str] = mapped_column(
+        ForeignKey("user.username"), primary_key=True
+    )
+    user: Mapped[User] = relationship(back_populates="votes")
+
+    tree_id: Mapped[int] = mapped_column(ForeignKey("tree.id"), primary_key=True)
+    tree: Mapped[Tree] = relationship(back_populates="votes")
 
 
 def fetch_user_from_db(username: str) -> User | None:
