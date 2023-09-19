@@ -1,8 +1,8 @@
 import enum
 import functools
-from typing import List
+from typing import List, Optional
 
-from sqlalchemy import ForeignKey, LargeBinary, String, create_engine, select
+from sqlalchemy import ForeignKey, Integer, LargeBinary, String, create_engine, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, relationship
 
 __engine = None
@@ -49,12 +49,14 @@ class User(Base):
 class Tree(Base):
     __tablename__ = "tree"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
     xpos: Mapped[float]
     ypos: Mapped[float]
+    status: Mapped[TreeStatus]
 
     donations: Mapped[List["Donation"]] = relationship(back_populates="tree")
+    sponsor: Mapped[Optional[str]] = mapped_column(default=None)
 
 
 class Donation(Base):
