@@ -4,12 +4,17 @@
     /*border: 1px solid crimson;*/
 }
 
-#map {
+#header {
     width: 100vw;
-    height: 100vh;
+    height: 5vh;
 }
 
-.popup-content {
+#map {
+    width: 100vw;
+    height: 95vh;
+}
+
+.flex-center {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -17,7 +22,7 @@
 
 }
 
-.popup-content img {
+.flex-center img {
     object-fit: contain;
     width: 90%;
 }

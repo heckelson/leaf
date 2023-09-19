@@ -24,11 +24,11 @@ let markers = [];
 
 function formatTemplate(name) {
     const markerTemplate = `
-<div class="popup-content">
+<div class="flex-center">
     <h2>This is a test</h2>
     <p>Hello this is a test content field</p>
     <p>This is being replaced with the name: {{ name }}</p>
-    
+
     <img src="https://blog.udemy.com/wp-content/uploads/2014/05/bigstock-test-icon-63758263.jpg">
 </div>
 `.replaceAll("{{ name }}", name)
@@ -40,6 +40,3 @@ function formatTemplate(name) {
 markers.push(L.marker([48.208498, 16.373132])
     .addTo(map)
     .bindPopup(formatTemplate("Alex")));
-
-
-
