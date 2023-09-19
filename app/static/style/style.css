@@ -97,6 +97,33 @@ body {
     margin-bottom: 20px;
 }
 
+.flash {
+    color: lightgray;
+    width: 100vh;
+    padding: 10px;
+}
+
+
+.category_done {
+    filter: hue-rotate(120deg);
+}
+
+.category_in_planning {
+    filter: hue-rotate(60deg);
+}
+
+.category_low_potential {
+    filter: hue-rotate(200deg);
+}
+
+.category_middle_potential {
+    filter: hue-rotate(220deg);
+}
+
+.category_high_potential {
+    filter: hue-rotate(300deg);
+}
+
 .login-section input[type="text"],
 .login-section input[type="password"],
 .login-section button {

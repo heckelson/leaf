@@ -26,7 +26,9 @@ class Role(enum.Enum):
 class TreeStatus(enum.Enum):
     DONE = 0
     IN_PLANNING = 1
-    POTENTIAL = 2
+    LOW_POTENTIAL = 2
+    MEDIUM_POTENTIAL = 3
+    HIGH_POTENTIAL = 4
 
 
 class Base(DeclarativeBase):
@@ -128,6 +130,7 @@ def fetch_all_trees_from_db() -> dict:
                     "xpos": tree.xpos,
                     "ypos": tree.ypos,
                     "sponsor": tree.sponsor,
+                    "status": tree.status.name,
                     "votes": tree_votes.get(tree.id),
                     "donations": tree_donations.get(tree.id),
                 }
@@ -148,7 +151,7 @@ def fetch_all_votes_for_user(username: str):
 def add_vote_for_user(username: str, tree_id: int):
     with Session(get_engine()) as session:
         stm_users_votes = select(Vote).where(
-            Vote.user_username.is_(username) and Vote.tree_id.is_(tree_id)
+            Vote.user_username.is_(username).__and__(Vote.tree_id.is_(tree_id))
         )
 
         # we have it already
@@ -162,4 +165,11 @@ def add_vote_for_user(username: str, tree_id: int):
 
         session.add(vote)
 
+        session.commit()
+
+
+def add_user_donation(username: str, tree_id: int, amount: float):
+    with Session(get_engine()) as session:
+        donation = Donation(user_username=username, amount=amount, tree_id=tree_id)
+        session.add(donation)
         session.commit()

@@ -1,5 +1,10 @@
-from app.db import add_vote_for_user, fetch_all_trees_from_db, fetch_all_votes_for_user
-from flask import Blueprint, session
+from db import (
+    add_user_donation,
+    add_vote_for_user,
+    fetch_all_trees_from_db,
+    fetch_all_votes_for_user,
+)
+from flask import Blueprint, request, session
 
 bp = Blueprint("trees", __name__, url_prefix="/trees")
 
@@ -12,16 +17,43 @@ def get_trees():
 @bp.get("/votes")
 def get_votes():
     if "username" not in session:
-        return {"error": "Not authenticated"}, 400
+        return {"error": "Not authenticated"}, 401
 
     return fetch_all_votes_for_user(session["username"])
 
 
-@bp.post("/vote/<int:tree_id>")
-def add_new_vote(tree_id: int):
+@bp.post("/vote")
+def add_new_vote():
     if "username" not in session:
-        return {"error": "Not authenticated"}, 400
+        return {"error": "Not authenticated"}, 401
 
-    add_vote_for_user(session["username"], tree_id)
+    if not ("tree_id" in request.json):
+        return {"error": "Malformed request"}, 400
+
+    try:
+        tree_id = int(request.json["tree_id"])
+    except ValueError:
+        return {"error": "Malformed request"}, 400
+
+    add_vote_for_user(session.get("username"), tree_id)
+
+    return {"ok": 1}, 201
+
+
+@bp.post("/fund")
+def fund_tree():
+    if "username" not in session:
+        return {"error": "Not authenticated"}, 401
+
+    if not ("tree_id" in request.json and "amount" in request.json):
+        return {"error": "Malformed request"}, 400
+
+    try:
+        tree_id = int(request.json["tree_id"])
+        amount = float(request.json["amount"])
+    except ValueError:
+        return {"error": "Malformed request"}, 400
+
+    add_user_donation(session.get("username"), tree_id, amount)
 
     return {"ok": 1}, 200
