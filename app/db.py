@@ -130,7 +130,7 @@ def fetch_all_trees_from_db() -> dict:
                     "xpos": tree.xpos,
                     "ypos": tree.ypos,
                     "sponsor": tree.sponsor,
-                    "status": tree.status,
+                    "status": tree.status.name,
                     "votes": tree_votes.get(tree.id),
                     "donations": tree_donations.get(tree.id),
                 }
