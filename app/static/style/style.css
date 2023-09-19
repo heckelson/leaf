@@ -39,3 +39,74 @@ p {
     object-fit: contain;
     width: 90%;
 }
+.flex-column div {
+    object-fit: contain;
+    width: 90%;
+}
+
+.logo_head {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+/* Stile für die Kreise */
+.logo-container {
+    display: flex;
+    align-items: center; /* Zentriert die Kreise vertikal */
+}
+
+.circle {
+    width: 30px; /* Kleinerer Durchmesser für die Kreise */
+    height: 30px; /* Kleinerer Durchmesser für die Kreise */
+    background-color: #fff;
+    border-radius: 50%; /* Kreisform */
+    margin-right: 10px; /* Hier wird margin-right verwendet, um den Abstand zum Rest der Navbar auf der rechten Seite zu erstellen */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #C4D6B0; /* Pastellblau */
+    color: #000; /* Schwarze Textfarbe */
+    margin: 0;
+}
+
+/* Stile für die Navbar */
+.navbar {
+    display: flex;
+    align-items: center; /* Zentriert die Kreise vertikal */
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.2); /* Hintergrund mit Transparenz für die Navigationsleiste */
+    margin-bottom: 20px; /* Hinzugefügter Abstand nach unten */
+}
+
+.navbar a {
+    color: #000; /* Schwarze Textfarbe für Links */
+    text-decoration: none;
+    margin-left: 10px;
+    position: relative;
+}
+
+.login-section {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.login-section input[type="text"],
+.login-section input[type="password"],
+.login-section button {
+    margin-right: 10px;
+}
+
+.login-section button {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}

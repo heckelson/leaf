@@ -1,4 +1,4 @@
-from db import add_vote_for_user, fetch_all_trees_from_db, fetch_all_votes_for_user
+from app.db import add_vote_for_user, fetch_all_trees_from_db, fetch_all_votes_for_user
 from flask import Blueprint, session
 
 bp = Blueprint("trees", __name__, url_prefix="/trees")
