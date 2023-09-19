@@ -8,39 +8,70 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | Leaf noone behind'
 }).addTo(map);
 
-
-// for random map clicks
-let popup = L.popup();
-
-function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
-}
-
-map.on('click', onMapClick);
-// end for random map clicks
-
 let markers = [];
 
+function fetchVotesForUser() {
+    const headers = new Headers();
+    headers.set("Cookie", document.cookie);
+
+    const request = new XMLHttpRequest()
+    request.open("GET", "http://localhost:5000/trees/votes", false);
+    // request.setRequestHeader("Cookie", document.cookie);
+    request.withCredentials = true;
+    request.send(null);
+
+    return JSON.parse(request.responseText).votes;
+}
+
 function formatTemplate(tree) {
-    return `
+    const votes = fetchVotesForUser();
+
+    let result = `
 <div class="flex-column">
-    <h2>Tree</h2>
+    <h2>Tree #${tree.id + 1}</h2>
     <p><b>Donations:</b> €${tree.donations}</p>
-    ${tree.sponsor ? '<p><b>Sponsor</b>: ' + tree.sponsor + "</p>" : ""}
+    <p><b>Votes:</b> ${tree.votes}</p>
+`;
 
-    <button onclick="voteForTree(${tree.id}, this)">Vote For tree!</button>
+    if (tree.sponsor) {
+        result += `<p><b>Sponsor</b>: + ${tree.sponsor} + </p>`;
+    }
 
+    if (votes) {
+        const youVotedForTree = votes.includes(tree.id);
 
-    <img src="https://blog.udemy.com/wp-content/uploads/2014/05/bigstock-test-icon-63758263.jpg">
+        if (youVotedForTree) {
+            result += '<p>You already voted for this tree!</p>';
+        } else {
+            result += `<button onclick="voteForTree(${tree.id}, this)">Vote For tree!</button>`
+        }
+    }
+
+    result += `
+    <p>Hold click on the image to see a preview of what it could look like!</p>
+
+    <div class="image-preview flex-column">
+        <img class="over" src="/static/vorher.jpg" alt="" onpointerdown="fadeOutImage(this)" onpointerup="fadeInImage(this)"/>
+        <img class="under" src="/static/nachher.jpg" alt=""/>
+    </div>
 </div>
 `;
+
+    return result;
+
 }
 
 function loadTreeData() {
     fetch("http://localhost:5000/trees").then((resp) => resp.json().then((data) => drawTreeData(data)))
+}
+
+
+function fadeOutImage(image) {
+    image.style.opacity = "0";
+}
+
+function fadeInImage(image) {
+    image.style.opacity = "1";
 }
 
 
@@ -49,7 +80,6 @@ function voteForTree(tree_id, button) {
         .stringify({
             "tree_id": tree_id
         });
-
 
     button.remove();
 
@@ -60,6 +90,8 @@ function voteForTree(tree_id, button) {
     fetch("http://localhost:5000/trees/vote", {
         method: "POST", headers: headers, body: myVote
     }).then((resp) => console.log(resp));
+
+    loadTreeData();
 
 }
 
@@ -92,17 +124,17 @@ function drawTreeData(treeData) {
             closePopupOnClick: false, autoClose: false
         }).setContent(formatTemplate(tree));
 
-
         newMarker
             .addTo(map)
-            .bindPopup(popup);
+            .bindPopup(popup, {
+                maxWidth: 500, minWidth: 500
+            });
 
         newMarker._icon.classList.add(getMarkerClassForTree(tree));
 
         markers.push(newMarker);
     }
 }
-
 
 function removeAllMarkers() {
     for (const marker of markers) {
