@@ -9,7 +9,8 @@ bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 @bp.route("/logout", methods=("GET", "POST"))
 def logout():
-    if session.pop("username"):
+    if "username" in session:
+        session.pop("username")
         flash("Logged out", FC.SUCCESS)
 
     return redirect(url_for("index.index"))

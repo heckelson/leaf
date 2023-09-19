@@ -26,7 +26,9 @@ class Role(enum.Enum):
 class TreeStatus(enum.Enum):
     DONE = 0
     IN_PLANNING = 1
-    POTENTIAL = 2
+    LOW_POTENTIAL = 2
+    MEDIUM_POTENTIAL = 3
+    HIGH_POTENTIAL = 4
 
 
 class Base(DeclarativeBase):
@@ -128,6 +130,7 @@ def fetch_all_trees_from_db() -> dict:
                     "xpos": tree.xpos,
                     "ypos": tree.ypos,
                     "sponsor": tree.sponsor,
+                    "status": tree.status,
                     "votes": tree_votes.get(tree.id),
                     "donations": tree_donations.get(tree.id),
                 }
