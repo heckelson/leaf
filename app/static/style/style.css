@@ -44,12 +44,15 @@ p {
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+}
 
+.flex-column p {
+    margin: 2px;
 }
 
 .flex-column img {
     object-fit: contain;
-    width: 90%;
+    width: 95%;
 }
 
 .flex-column div {

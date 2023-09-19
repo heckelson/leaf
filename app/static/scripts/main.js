@@ -29,12 +29,12 @@ function formatTemplate(tree) {
     let result = `
 <div class="flex-column">
     <h2>Tree #${tree.id + 1}</h2>
-    <p><b>Donations:</b> €${tree.donations}</p>
+    <p><b>Total Donations:</b> €${tree.donations.toFixed(2)}</p>
     <p><b>Votes:</b> ${tree.votes}</p>
 `;
 
     if (tree.sponsor) {
-        result += `<p><b>Sponsor</b>: + ${tree.sponsor} + </p>`;
+        result += `<p><b>Sponsor</b>: ${tree.sponsor}</p>`;
     }
 
     if (votes) {
@@ -53,6 +53,14 @@ function formatTemplate(tree) {
     <div class="image-preview flex-column">
         <img class="over" src="/static/vorher.jpg" alt="" onpointerdown="fadeOutImage(this)" onpointerup="fadeInImage(this)"/>
         <img class="under" src="/static/nachher.jpg" alt=""/>
+    </div>
+
+    <div>
+    <form action="http://localhost:5000/trees/fund" method="post">
+        <label>Amount to donate</label>
+        <input type="number">
+        <button type="submit">Send us money!</button>
+    </form>
     </div>
 </div>
 `;

@@ -1,4 +1,5 @@
 if __name__ == "__main__":
+    import random
     from crypt import generate_salt, hash_password
     from random import sample
 
@@ -42,22 +43,22 @@ if __name__ == "__main__":
 
     donations = [
         Donation(
-            amount=10.0,
+            amount=random.randint(10, 50) + random.randint(0, 100) / 10,
             tree_id=sample(trees, 1)[0].id,
             user_username=sample(users, 1)[0].username,
         ),
         Donation(
-            amount=10.0,
+            amount=random.randint(10, 50) + random.randint(0, 100) / 10,
             tree_id=sample(trees, 1)[0].id,
             user_username=sample(users, 1)[0].username,
         ),
         Donation(
-            amount=10.0,
+            amount=random.randint(10, 50) + random.randint(0, 100) / 10,
             tree_id=sample(trees, 1)[0].id,
             user_username=sample(users, 1)[0].username,
         ),
         Donation(
-            amount=10.0,
+            amount=random.randint(10, 50) + random.randint(0, 100) / 10,
             tree_id=sample(trees, 1)[0].id,
             user_username=sample(users, 1)[0].username,
         ),
