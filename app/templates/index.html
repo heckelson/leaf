@@ -14,31 +14,48 @@
 </head>
 
 <body>
-<div id="header" class="flex-row">
-    {% if 'username' in session %}
-        <p>
-            Logged in as user: {{ session['username'] }}
-        </p>
-        <p><a href="/auth/logout">Log out</a></p>
-    {% else %}
-        <div>
-            <form action="/auth/login" method="POST">
-                <label>
-                    Username
-                    <input type="text" name="username" placeholder="Username">
-                </label>
-                <label>
-                    Passwort
-                    <input type="password" name="password" placeholder="Password">
-                </label>
-                <footer>
-                    <input type="submit" value="Log in">
-                </footer>
-            </form>
+    <div class="navbar">
+        <div class="logo-container">
+            <div class="circle">
+                <img src="{{ url_for('static', filename='tree_logo.png') }}" alt="" class="logo_head">
+            </div>    
         </div>
+       
+        <a href="index.html">Map</a>
+        <a href="Reasons.html">Reasons</a>
+        <a href="index.html">Funding</a>
+        <a href="#">About us</a>
+        <a href="#">Impressum</a>
+    </div>   
+    <div class="login-section">
+    {% if 'username' in session %}
+    <p>
+        Logged in as user: {{ session['username'] }}
+    </p>
+    <p><a href="/auth/logout">Log out</a></p>
+{% else %}
+    <div>
+        <form action="/auth/login" method="POST">
+            <label>
+                Username
+                <input type="text" name="username" placeholder="Username">
+            </label>
+            <label>
+                Passwort
+                <input type="password" name="password" placeholder="Password">
+            </label>
+            
+                <input type="submit" value="Log in">
+            
+        </form>
+    
 
-    {% endif %}
+{% endif %}
+    </div>
+    
+
 </div>
+
 
 <div id="map"></div>
 
