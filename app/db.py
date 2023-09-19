@@ -93,3 +93,73 @@ def fetch_user_from_db(username: str) -> User | None:
 
     with Session(get_engine()) as session:
         return session.scalar(statement)
+
+
+def fetch_all_trees_from_db() -> dict:
+    with Session(get_engine()) as session:
+        # forgive me
+        stm_all_trees = select(Tree)
+        stm_all_votes = select(Vote)
+        stm_crowdfund_money = select(Donation)
+
+        trees = session.scalars(stm_all_trees).fetchall()
+        votes = session.scalars(stm_all_votes).fetchall()
+        donations = session.scalars(stm_crowdfund_money).fetchall()
+
+        tree_votes = {
+            tree.id: len(list(filter(lambda v: v.tree_id == tree.id, votes)))
+            for tree in trees
+        }
+
+        tree_donations = {
+            tree.id: sum(
+                map(
+                    lambda d: d.amount,
+                    (filter(lambda v: v.tree_id == tree.id, donations)),
+                )
+            )
+            for tree in trees
+        }
+
+        return {
+            "trees": [
+                {
+                    "id": tree.id,
+                    "xpos": tree.xpos,
+                    "ypos": tree.ypos,
+                    "sponsor": tree.sponsor,
+                    "votes": tree_votes.get(tree.id),
+                    "donations": tree_donations.get(tree.id),
+                }
+                for tree in trees
+            ]
+        }
+
+
+def fetch_all_votes_for_user(username: str):
+    with Session(get_engine()) as session:
+        stm_users_votes = select(Vote).where(Vote.user_username.is_(username))
+
+        votes = session.scalars(stm_users_votes).fetchall()
+
+        return {"votes": [vote.tree_id for vote in votes], "username": username}
+
+
+def add_vote_for_user(username: str, tree_id: int):
+    with Session(get_engine()) as session:
+        stm_users_votes = select(Vote).where(
+            Vote.user_username.is_(username) and Vote.tree_id.is_(tree_id)
+        )
+
+        # we have it already
+        if session.scalar(stm_users_votes):
+            return
+
+        vote = Vote(
+            user_username=username,
+            tree_id=tree_id,
+        )
+
+        session.add(vote)
+
+        session.commit()
