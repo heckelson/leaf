@@ -27,17 +27,17 @@ def add_new_vote():
     if "username" not in session:
         return {"error": "Not authenticated"}, 401
 
-    if not ("tree_id" in request.form):
+    if not ("tree_id" in request.json):
         return {"error": "Malformed request"}, 400
 
     try:
-        tree_id = int(request.form["tree_id"])
+        tree_id = int(request.json["tree_id"])
     except ValueError:
         return {"error": "Malformed request"}, 400
 
     add_vote_for_user(session.get("username"), tree_id)
 
-    return {"ok": 1}, 200
+    return {"ok": 1}, 201
 
 
 @bp.post("/fund")
@@ -45,12 +45,12 @@ def fund_tree():
     if "username" not in session:
         return {"error": "Not authenticated"}, 401
 
-    if not ("tree_id" in request.form and "amount" in request.form):
+    if not ("tree_id" in request.json and "amount" in request.json):
         return {"error": "Malformed request"}, 400
 
     try:
-        tree_id = int(request.form["tree_id"])
-        amount = float(request.form["amount"])
+        tree_id = int(request.json["tree_id"])
+        amount = float(request.json["amount"])
     except ValueError:
         return {"error": "Malformed request"}, 400
 

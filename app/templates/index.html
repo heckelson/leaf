@@ -14,27 +14,43 @@
 </head>
 
 <body>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flex-row">
+            {% for category, message in messages %}
+                {% if category == "success" %}
+                    <div class="flash {{ category }}" style="background-color: #8fbc8f">{{ message }}</div>
+                {% else %}
+                    <div class="flash {{ category }}" style="background-color: #A52A2A">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+<div id="header" class="flex-row">
     <div class="navbar">
         <div class="logo-container">
             <div class="circle">
                 <img src="{{ url_for('static', filename='tree_logo.png') }}" alt="" class="logo_head">
-            </div>    
+            </div>
         </div>
-       
+
         <a href="index.html">Map</a>
         <a href="Reasons.html">Reasons</a>
         <a href="index.html">Funding</a>
         <a href="#">About us</a>
         <a href="#">Impressum</a>
-    </div>   
+    </div>
     <div class="login-section">
     {% if 'username' in session %}
-    <p>
-        Logged in as user: {{ session['username'] }}
-    </p>
-    <p><a href="/auth/logout">Log out</a></p>
-{% else %}
-    <div>
+        <p>
+            Logged in as user: {{ session['username'] }}
+        </p>
+        <p><a href="/auth/logout">Log out</a></p>
+    {% else %}
+        <div>
         <form action="/auth/login" method="POST">
             <label>
                 Username
@@ -44,18 +60,17 @@
                 Passwort
                 <input type="password" name="password" placeholder="Password">
             </label>
-            
-                <input type="submit" value="Log in">
-            
-        </form>
-    
 
-{% endif %}
+            <input type="submit" value="Log in">
+
+        </form>
+
+
+    {% endif %}
     </div>
-    
+
 
 </div>
-
 
 <div id="map"></div>
 

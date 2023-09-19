@@ -151,7 +151,7 @@ def fetch_all_votes_for_user(username: str):
 def add_vote_for_user(username: str, tree_id: int):
     with Session(get_engine()) as session:
         stm_users_votes = select(Vote).where(
-            Vote.user_username.is_(username) and Vote.tree_id.is_(tree_id)
+            Vote.user_username.is_(username).__and__(Vote.tree_id.is_(tree_id))
         )
 
         # we have it already

@@ -26,11 +26,11 @@ if __name__ == "__main__":
     trees = [
         Tree(id=0, xpos=48.208119, ypos=16.371828, status=TreeStatus.DONE),
         Tree(id=1, xpos=48.208991, ypos=16.372735, status=TreeStatus.DONE),
-        Tree(id=2, xpos=48.208991, ypos=16.372735, status=TreeStatus.IN_PLANNING),
+        Tree(id=2, xpos=48.207107, ypos=16.374865, status=TreeStatus.IN_PLANNING),
         Tree(id=3, xpos=48.208426, ypos=16.374076, status=TreeStatus.LOW_POTENTIAL),
-        Tree(id=4, xpos=48.208426, ypos=16.374076, status=TreeStatus.MEDIUM_POTENTIAL),
+        Tree(id=4, xpos=48.208951, ypos=16.372139, status=TreeStatus.MEDIUM_POTENTIAL),
         Tree(id=5, xpos=48.20819, ypos=16.370916, status=TreeStatus.HIGH_POTENTIAL),
-        Tree(id=6, xpos=48.20819, ypos=16.370916, status=TreeStatus.HIGH_POTENTIAL),
+        Tree(id=6, xpos=48.20755, ypos=16.373041, status=TreeStatus.HIGH_POTENTIAL),
         Tree(
             id=7,
             xpos=48.209399,
