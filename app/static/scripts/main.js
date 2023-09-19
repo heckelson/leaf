@@ -24,7 +24,7 @@ let markers = [];
 
 function formatTemplate(name) {
     const markerTemplate = `
-<div class="flex-center">
+<div class="flex-column">
     <h2>This is a test</h2>
     <p>Hello this is a test content field</p>
     <p>This is being replaced with the name: {{ name }}</p>

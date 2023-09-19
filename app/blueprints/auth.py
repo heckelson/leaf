@@ -1,8 +1,7 @@
-from crypt import password_matches
-
-from db import fetch_user_from_db
 from flask import Blueprint, flash, redirect, request, session, url_for
 
+from app.crypt import password_matches
+from app.db import fetch_user_from_db
 from app.flash_categories import FlashCategory as FC
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")

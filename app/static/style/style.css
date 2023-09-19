@@ -4,9 +4,15 @@
     /*border: 1px solid crimson;*/
 }
 
+p {
+    margin: 2px;
+}
+
 #header {
     width: 100vw;
     height: 5vh;
+    border-bottom: 2px solid rgba(0, 0, 0, 50%);
+    z-index: 10;
 }
 
 #map {
@@ -14,7 +20,14 @@
     height: 95vh;
 }
 
-.flex-center {
+.flex-row {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -22,7 +35,7 @@
 
 }
 
-.flex-center img {
+.flex-column img {
     object-fit: contain;
     width: 90%;
 }

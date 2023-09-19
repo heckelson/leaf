@@ -1,6 +1,6 @@
 from flask import Flask
 
-from app.blueprints import auth, index
+from app.blueprints import auth, index, trees
 
 __secret_key = "6b23798833b26e1ea779b921982cacc236fb139c5e5ff0a26a394c2163031aad"
 
@@ -12,5 +12,6 @@ def create_app():
 
     app.register_blueprint(index.bp)
     app.register_blueprint(auth.bp)
+    app.register_blueprint(trees.bp)
 
     return app

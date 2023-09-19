@@ -14,9 +14,7 @@
 </head>
 
 <body>
-<div id="header" class="flex-center">
-    Hello
-
+<div id="header" class="flex-row">
     {% if 'username' in session %}
         <p>
             Logged in as user: {{ session['username'] }}
@@ -32,7 +30,6 @@
                 <label>
                     Passwort
                     <input type="password" name="password" placeholder="Password">
-
                 </label>
                 <footer>
                     <input type="submit" value="Log in">
