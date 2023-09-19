@@ -27,8 +27,6 @@ def add_new_vote():
     if "username" not in session:
         return {"error": "Not authenticated"}, 401
 
-    # TODO: Switch to JSON postythingy for voting
-
     if not ("tree_id" in request.form):
         return {"error": "Malformed request"}, 400
 
