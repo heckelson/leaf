@@ -163,3 +163,10 @@ def add_vote_for_user(username: str, tree_id: int):
         session.add(vote)
 
         session.commit()
+
+
+def add_user_donation(username: str, tree_id: int, amount: float):
+    with Session(get_engine()) as session:
+        donation = Donation(user_username=username, amount=amount, tree_id=tree_id)
+        session.add(donation)
+        session.commit()
