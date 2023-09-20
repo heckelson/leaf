@@ -1,14 +1,31 @@
 'use strict';
 
 const STEPHANSDOM = [48.208498, 16.373132];
-const map = L.map('map').setView(STEPHANSDOM, 16);
+const map = L.map('map').setView(STEPHANSDOM, 17);
+let markers = [];
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 21,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | Leaf noone behind'
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | Die Zweigstelle'
 }).addTo(map);
 
-let markers = [];
+
+/*Legend specific*/
+let legend = L.control({position: "bottomleft"});
+
+legend.onAdd = function (map) {
+    let div = L.DomUtil.create("div", "legend");
+    div.innerHTML += "<h4>I am Legend</h4>";
+    div.innerHTML += '<i style="background: #e14b83"></i><span>Vienna today</span><br>';
+    div.innerHTML += '<i style="background: #985cdd"></i><span>Planned</span><br>';
+    div.innerHTML += '<br />';
+    div.innerHTML += '<i style="background: #9e740f"></i><span>Low Potential</span><br>';
+    div.innerHTML += '<i style="background: #788007"></i><span>Middle Potential</span><br>';
+    div.innerHTML += '<i style="background: #199f6a"></i><span>High Potential</span><br>';
+    return div;
+};
+legend.addTo(map);
+
 
 function fetchVotesForUser() {
     const headers = new Headers();
@@ -56,9 +73,10 @@ function formatTemplate(tree) {
     </div>
 
     <div>
-    <form action="http://localhost:5000/trees/fund" method="post">
-        <label>Amount to donate</label>
-        <input type="number">
+    <form action="http://localhost:5000/trees/fund" method="post" class="donation-form">
+        <label>Amount to donate €</label>
+        <input type="number" name="amount">
+        <input type="hidden" name="tree_id" value="${tree.id}">
         <button type="submit">Send us money!</button>
     </form>
     </div>
@@ -68,6 +86,24 @@ function formatTemplate(tree) {
     return result;
 
 }
+
+
+function showFlashMessage(message) {
+    let headerDiv = document.getElementById('header');
+    let flashMessageDiv = document.createElement('div');
+
+    flashMessageDiv.innerHTML = `
+    <div class="flash-message">
+        <button id='close' onClick="this.parentElement.remove()">
+            ✕
+        </button>
+
+        <div class="message-{{ category }}">${message}</div>
+    </div>
+    `
+    headerDiv.after(flashMessageDiv);
+}
+
 
 function loadTreeData() {
     fetch("http://localhost:5000/trees").then((resp) => resp.json().then((data) => drawTreeData(data)))
@@ -97,10 +133,10 @@ function voteForTree(tree_id, button) {
 
     fetch("http://localhost:5000/trees/vote", {
         method: "POST", headers: headers, body: myVote
-    }).then((resp) => console.log(resp));
-
-    loadTreeData();
-
+    }).then((resp) => {
+        showFlashMessage(`Thank you for voting for tree #${tree_id+1}!`)
+        loadTreeData();
+    });
 }
 
 
