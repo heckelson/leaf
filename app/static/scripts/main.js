@@ -153,3 +153,5 @@ function removeAllMarkers() {
 }
 
 loadTreeData();
+
+console.log("🗿");

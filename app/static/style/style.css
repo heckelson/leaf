@@ -1,9 +1,19 @@
+
+:root {
+    --pakistan-green: #243010;
+    --tea-green: #c4d6b0;
+    --golden-brown: #99621e;
+    --grandeis-blue: #256eff;
+}
+
 * {
     margin: 0;
     box-sizing: border-box;
     /*border: 1px solid crimson;*/
     font-family: 'Open Sans', sans-serif;
+    color: var(--grandeis-blue);
 }
+
 
 p {
     margin: 2px;
@@ -85,7 +95,7 @@ p {
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #C4D6B0; /* Pastellblau */
+    background-color: var(--tea-green); /* Pastellblau */
     color: #000; /* Schwarze Textfarbe */
     margin: 0;
 }
@@ -100,7 +110,7 @@ body {
 }
 
 .navbar a {
-    color: #000; /* Schwarze Textfarbe für Links */
+    color: var(--grandeis-blue); /* Schwarze Textfarbe für Links */
     text-decoration: none;
     margin-left: 10px;
     position: relative;
@@ -141,8 +151,8 @@ body {
 }
 
 .login-section button {
-    background-color: #fff;
-    color: #333;
+    background-color: var(--pakistan-green);
+    color: var(--grandeis-blue);
     border: none;
     padding: 5px 10px;
     cursor: pointer;
