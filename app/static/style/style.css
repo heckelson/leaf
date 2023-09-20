@@ -1,8 +1,20 @@
+
+:root {
+    --pakistan-green: #243010;
+    --tea-green: #c4d6b0;
+    --golden-brown: #99621e;
+    --grandeis-blue: #256eff;
+}
+
 * {
     margin: 0;
     box-sizing: border-box;
     /*border: 1px solid crimson;*/
+    font-family: 'Open Sans', sans-serif;
+    color: var(--pakistan-green);
+    font-weight: bold;
 }
+
 
 p {
     margin: 2px;
@@ -10,14 +22,26 @@ p {
 
 #header {
     width: 100vw;
-    height: 5vh;
+    height: 7vh;
     border-bottom: 2px solid rgba(0, 0, 0, 50%);
     z-index: 10;
 }
 
 #map {
     width: 100vw;
-    height: 95vh;
+    height: 93vh;
+    z-index: 0;
+}
+
+.image-preview {
+    position: relative;
+
+}
+
+.over {
+    z-index: 10;
+    position: absolute;
+    top: 0;
 }
 
 .flex-row {
@@ -32,13 +56,17 @@ p {
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+}
 
+.flex-column p {
+    margin: 2px;
 }
 
 .flex-column img {
     object-fit: contain;
-    width: 90%;
+    width: 95%;
 }
+
 .flex-column div {
     object-fit: contain;
     width: 90%;
@@ -59,7 +87,6 @@ p {
 .circle {
     width: 30px; /* Kleinerer Durchmesser für die Kreise */
     height: 30px; /* Kleinerer Durchmesser für die Kreise */
-    background-color: #fff;
     border-radius: 50%; /* Kreisform */
     margin-right: 10px; /* Hier wird margin-right verwendet, um den Abstand zum Rest der Navbar auf der rechten Seite zu erstellen */
     display: flex;
@@ -68,8 +95,8 @@ p {
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #C4D6B0; /* Pastellblau */
+    background-color: var(--tea-green); /* Pastellblau */
+    background-image: linear-gradient(to right, var(--tea-green), #b3b7c6); /* Pastellblau */
     color: #000; /* Schwarze Textfarbe */
     margin: 0;
 }
@@ -79,28 +106,30 @@ body {
     display: flex;
     align-items: center; /* Zentriert die Kreise vertikal */
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.2); /* Hintergrund mit Transparenz für die Navigationsleiste */
     margin-bottom: 20px; /* Hinzugefügter Abstand nach unten */
 }
 
-.navbar a {
-    color: #000; /* Schwarze Textfarbe für Links */
+.navbar *, .login-section * {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    color: var(--grandeis-blue); /* Schwarze Textfarbe für Links */
     text-decoration: none;
     margin-left: 10px;
     position: relative;
 }
+
+a:hover {
+    text-decoration: underline;
+}
+
 
 .login-section {
     display: flex;
     align-items: center;
     margin-left: 10px;
     margin-bottom: 20px;
-}
-
-.flash {
-    color: lightgray;
-    width: 100vh;
-    padding: 10px;
 }
 
 
@@ -131,9 +160,80 @@ body {
 }
 
 .login-section button {
-    background-color: #fff;
-    color: #333;
+    background-color: var(--pakistan-green);
+    color: var(--grandeis-blue);
     border: none;
     padding: 5px 10px;
     cursor: pointer;
+}
+
+/* Source: https://codepen.io/haakseth/pen/KQbjdO */
+.legend {
+    padding: 6px 8px;
+    font: 14px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+    /*border-radius: 5px;*/
+    line-height: 24px;
+    color: #555;
+}
+
+.legend h4 {
+    text-align: center;
+    font-size: 16px;
+    margin: 2px 12px 8px;
+    color: #777;
+}
+
+.legend span {
+    position: relative;
+    bottom: 3px;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin: 0 8px 0 0;
+    opacity: 0.7;
+}
+
+.legend i.icon {
+    background-size: 18px;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/* End Source */
+
+
+.flash-message {
+    font-family: 'Open Sans', sans-serif;
+    position: fixed;
+    margin-top: 2vw;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    padding-top: 1vh;
+    padding-left: 1vh;
+    padding-bottom: 1vh;
+    padding-right: 3vw;
+
+    width: 78vw;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+
+    z-index: 2;
+
+}
+
+.flash-message #close {
+    position: fixed;
+    left: 85vw;
+    color: var(--pakistan-green);
+    background-color: white;
+}
+
+.donation-form {
+    margin-top: 1vh;
 }

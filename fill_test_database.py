@@ -1,10 +1,12 @@
 if __name__ == "__main__":
-    from crypt import generate_salt, hash_password
+    import random
     from random import sample
 
-    from db import Donation, Role, Tree, TreeStatus, User, Vote, get_engine
-    from generators import generate_username
     from sqlalchemy.orm import Session
+
+    from app.crypt import generate_salt, hash_password
+    from app.db import Donation, Role, Tree, TreeStatus, User, Vote, get_engine
+    from app.generators import generate_username
 
     def user_gen():
         test_user_password = "12345"
@@ -42,22 +44,22 @@ if __name__ == "__main__":
 
     donations = [
         Donation(
-            amount=10.0,
+            amount=random.randint(10, 50) + random.randint(0, 100) / 10,
             tree_id=sample(trees, 1)[0].id,
             user_username=sample(users, 1)[0].username,
         ),
         Donation(
-            amount=10.0,
+            amount=random.randint(10, 50) + random.randint(0, 100) / 10,
             tree_id=sample(trees, 1)[0].id,
             user_username=sample(users, 1)[0].username,
         ),
         Donation(
-            amount=10.0,
+            amount=random.randint(10, 50) + random.randint(0, 100) / 10,
             tree_id=sample(trees, 1)[0].id,
             user_username=sample(users, 1)[0].username,
         ),
         Donation(
-            amount=10.0,
+            amount=random.randint(10, 50) + random.randint(0, 100) / 10,
             tree_id=sample(trees, 1)[0].id,
             user_username=sample(users, 1)[0].username,
         ),

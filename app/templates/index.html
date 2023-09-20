@@ -2,75 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>pflanz.mi</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin=""/>
 
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='/style/style.css') }}"
+          href="{{ url_for('static', filename='style/style.css') }}"
           type="text/css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href=" {{ url_for('static', filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap"
+          rel="stylesheet">
 </head>
 
 <body>
-
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        <div class="flex-row">
-            {% for category, message in messages %}
-                {% if category == "success" %}
-                    <div class="flash {{ category }}" style="background-color: #8fbc8f">{{ message }}</div>
-                {% else %}
-                    <div class="flash {{ category }}" style="background-color: #A52A2A">{{ message }}</div>
-                {% endif %}
-            {% endfor %}
-        </div>
-    {% endif %}
-{% endwith %}
 
 <div id="header" class="flex-row">
     <div class="navbar">
         <div class="logo-container">
             <div class="circle">
-                <img src="{{ url_for('static', filename='tree_logo.png') }}" alt="" class="logo_head">
+                <img src="{{ url_for('static', filename='tree_logo_transparent.png') }}"
+                     alt="" class="logo_head">
             </div>
         </div>
 
-        <a href="index.html">Map</a>
-        <a href="Reasons.html">Reasons</a>
-        <a href="index.html">Funding</a>
+        <a href="#">Map</a>
+        <a href="#">Why?</a>
+        <a href="#">Funding</a>
         <a href="#">About us</a>
         <a href="#">Impressum</a>
     </div>
     <div class="login-section">
-    {% if 'username' in session %}
-        <p>
-            Logged in as user: {{ session['username'] }}
-        </p>
-        <p><a href="/auth/logout">Log out</a></p>
-    {% else %}
-        <div>
-        <form action="/auth/login" method="POST">
-            <label>
-                Username
-                <input type="text" name="username" placeholder="Username">
-            </label>
-            <label>
-                Passwort
-                <input type="password" name="password" placeholder="Password">
-            </label>
+        {% if 'username' in session %}
+            <p>
+                Logged in as user: {{ session['username'] }}
+            </p>
+            <p><a href="/auth/logout">Log out</a></p>
+        {% else %}
+            <div>
+            <form action="/auth/login" method="POST">
+                <label>
+                    Username
+                    <input type="text" name="username" placeholder="Username">
+                </label>
+                <label>
+                    Passwort
+                    <input type="password" name="password" placeholder="Password">
+                </label>
 
-            <input type="submit" value="Log in">
+                <input type="submit" value="Log in">
 
-        </form>
+            </form>
 
 
-    {% endif %}
+        {% endif %}
+        </div>
+
     </div>
-
-
 </div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-message">
+            <button id='close' onclick="this.parentElement.remove()">
+                ✕
+            </button>
+
+            {% for category, message in messages %}
+                <div class="message-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
 
 <div id="map"></div>
 
@@ -78,6 +92,6 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""></script>
 
-<script src="{{ url_for('static', filename='/scripts/main.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
 </body>
 </html>

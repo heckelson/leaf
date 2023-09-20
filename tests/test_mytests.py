@@ -1,2 +1,2 @@
 def test_my_test():
-    assert True == True
+    assert "It's going to be okay."
