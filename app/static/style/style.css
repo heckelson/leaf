@@ -22,7 +22,7 @@ p {
 
 #header {
     width: 100vw;
-    height: 5vh;
+    height: 7vh;
     border-bottom: 2px solid rgba(0, 0, 0, 50%);
     z-index: 10;
 }
@@ -87,7 +87,6 @@ p {
 .circle {
     width: 30px; /* Kleinerer Durchmesser für die Kreise */
     height: 30px; /* Kleinerer Durchmesser für die Kreise */
-    background-color: #fff;
     border-radius: 50%; /* Kreisform */
     margin-right: 10px; /* Hier wird margin-right verwendet, um den Abstand zum Rest der Navbar auf der rechten Seite zu erstellen */
     display: flex;
@@ -96,8 +95,8 @@ p {
 }
 
 body {
-    font-family: Arial, sans-serif;
     background-color: var(--tea-green); /* Pastellblau */
+    background-image: linear-gradient(to right, var(--tea-green), #b3b7c6); /* Pastellblau */
     color: #000; /* Schwarze Textfarbe */
     margin: 0;
 }
@@ -110,12 +109,21 @@ body {
     margin-bottom: 20px; /* Hinzugefügter Abstand nach unten */
 }
 
-.navbar a {
+.navbar *, .login-section * {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
     color: var(--grandeis-blue); /* Schwarze Textfarbe für Links */
     text-decoration: none;
     margin-left: 10px;
     position: relative;
 }
+
+a:hover {
+    text-decoration: underline;
+}
+
 
 .login-section {
     display: flex;
@@ -200,6 +208,7 @@ body {
 
 
 .flash-message {
+    font-family: 'Open Sans', sans-serif;
     position: fixed;
     margin-top: 2vw;
     margin-left: 10vw;
