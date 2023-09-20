@@ -1,10 +1,11 @@
-from db import (
+from flask import Blueprint, flash, redirect, request, session, url_for
+
+from app.db import (
     add_user_donation,
     add_vote_for_user,
     fetch_all_trees_from_db,
     fetch_all_votes_for_user,
 )
-from flask import Blueprint, flash, redirect, request, session, url_for
 
 bp = Blueprint("trees", __name__, url_prefix="/trees")
 

@@ -1,11 +1,12 @@
 if __name__ == "__main__":
     import random
-    from crypt import generate_salt, hash_password
     from random import sample
 
-    from db import Donation, Role, Tree, TreeStatus, User, Vote, get_engine
-    from generators import generate_username
     from sqlalchemy.orm import Session
+
+    from app.crypt import generate_salt, hash_password
+    from app.db import Donation, Role, Tree, TreeStatus, User, Vote, get_engine
+    from app.generators import generate_username
 
     def user_gen():
         test_user_password = "12345"
