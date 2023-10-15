@@ -13,11 +13,10 @@ RUN python -m venv .venv/
 RUN python -m pip install pipenv
 
 RUN python -m pipenv install
-RUN python -m pipenv install waitress
 
 RUN python -m pipenv run python create_db_schema.py -y
 RUN python -m pipenv run python fill_test_database.py
 
-EXPOSE 8080:8080
+# pipenv run waitress-serve --port 5005 --url-scheme 'https' --call app:create_app
 
-CMD ["python", "-m", "pipenv", "run", "waitress-serve", "--call", "app:create_app"]
+CMD ["python", "-m", "pipenv", "run", "waitress-serve", "--port", "5005", "--url-scheme", "'https'", "--call", "app:create_app"]
