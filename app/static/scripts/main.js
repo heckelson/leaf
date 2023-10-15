@@ -1,5 +1,7 @@
 'use strict';
 
+const request_url = "http://localhost:8080";
+
 const STEPHANSDOM = [48.208498, 16.373132];
 const map = L.map('map').setView(STEPHANSDOM, 17);
 let markers = [];
@@ -32,8 +34,7 @@ function fetchVotesForUser() {
     headers.set("Cookie", document.cookie);
 
     const request = new XMLHttpRequest()
-    request.open("GET", "http://localhost:5000/trees/votes", false);
-    // request.setRequestHeader("Cookie", document.cookie);
+    request.open("GET", request_url + "/trees/votes", false);
     request.withCredentials = true;
     request.send(null);
 
@@ -73,7 +74,7 @@ function formatTemplate(tree) {
     </div>
 
     <div>
-    <form action="http://localhost:5000/trees/fund" method="post" class="donation-form">
+    <form action=${request_url + "/trees/fund"} method="post" class="donation-form">
         <label>Amount to donate €</label>
         <input type="number" name="amount">
         <input type="hidden" name="tree_id" value="${tree.id}">
@@ -106,7 +107,7 @@ function showFlashMessage(message) {
 
 
 function loadTreeData() {
-    fetch("http://localhost:5000/trees").then((resp) => resp.json().then((data) => drawTreeData(data)))
+    fetch(request_url + "/trees").then((resp) => resp.json().then((data) => drawTreeData(data)))
 }
 
 
@@ -131,7 +132,7 @@ function voteForTree(tree_id, button) {
     headers.set("Cookie", document.cookie);
     headers.set("Content-type", "application/json");
 
-    fetch("http://localhost:5000/trees/vote", {
+    fetch(request_url + "/trees/vote", {
         method: "POST", headers: headers, body: myVote
     }).then((resp) => {
         showFlashMessage(`Thank you for voting for tree #${tree_id+1}!`)
