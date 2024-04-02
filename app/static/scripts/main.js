@@ -13,7 +13,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 /*Legend specific*/
-let legend = L.control({position: "bottomleft"});
+let legend = L.control({ position: "bottomleft" });
 
 legend.onAdd = function (map) {
     let div = L.DomUtil.create("div", "legend");
@@ -69,7 +69,7 @@ function formatTemplate(tree) {
     <p>Hold click on the image to see a preview of what it could look like!</p>
 
     <div class="image-preview flex-column">
-        <img class="over" src="/static/vorher.jpg" alt="" onpointerdown="fadeOutImage(this)" onpointerup="fadeInImage(this)"/>
+        <img class="overlaid-image" src="/static/vorher.jpg" alt="" onpointerdown="fadeOutImage(this)" onpointerup="fadeInImage(this)"/>
         <img class="under" src="/static/nachher.jpg" alt=""/>
     </div>
 
@@ -135,7 +135,7 @@ function voteForTree(tree_id, button) {
     fetch(request_url + "/trees/vote", {
         method: "POST", headers: headers, body: myVote
     }).then((resp) => {
-        showFlashMessage(`Thank you for voting for tree #${tree_id+1}!`)
+        showFlashMessage(`Thank you for voting for tree #${tree_id + 1}!`)
         loadTreeData();
     });
 }

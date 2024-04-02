@@ -1,4 +1,4 @@
-
+/* General config */
 :root {
     --pakistan-green: #243010;
     --tea-green: #c4d6b0;
@@ -9,10 +9,17 @@
 * {
     margin: 0;
     box-sizing: border-box;
-    /*border: 1px solid crimson;*/
+    border: 1px solid crimson;
     font-family: 'Open Sans', sans-serif;
     color: var(--pakistan-green);
     font-weight: bold;
+}
+
+body {
+    background-color: var(--tea-green);
+    background-image: linear-gradient(to right, var(--tea-green), #b3b7c6);
+    color: #000;
+    margin: 0;
 }
 
 
@@ -20,33 +27,21 @@ p {
     margin: 2px;
 }
 
-#header {
-    width: 100vw;
-    height: 7vh;
-    border-bottom: 2px solid rgba(0, 0, 0, 50%);
-    z-index: 10;
-}
-
-#map {
-    width: 100vw;
-    height: 93vh;
-    z-index: 0;
-}
-
-.image-preview {
+a {
+    color: var(--grandeis-blue);
+    text-decoration: none;
+    margin-left: 10px;
     position: relative;
-
 }
 
-.over {
-    z-index: 10;
-    position: absolute;
-    top: 0;
+a:hover {
+    text-decoration: underline;
 }
+
 
 .flex-row {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
 }
@@ -72,91 +67,83 @@ p {
     width: 90%;
 }
 
+
+/* Header stuff */
+#header {
+    width: 100vw;
+    height: 7vh;
+    border-bottom: 2px solid rgba(0, 0, 0, 50%);
+}
+
+/* The tree logo on the header. */
 .logo_head {
     width: 40px;
     height: 40px;
     object-fit: cover;
 }
 
-/* Stile für die Kreise */
 .logo-container {
     display: flex;
-    align-items: center; /* Zentriert die Kreise vertikal */
+    align-items: center;
 }
 
 .circle {
-    width: 30px; /* Kleinerer Durchmesser für die Kreise */
-    height: 30px; /* Kleinerer Durchmesser für die Kreise */
-    border-radius: 50%; /* Kreisform */
-    margin-right: 10px; /* Hier wird margin-right verwendet, um den Abstand zum Rest der Navbar auf der rechten Seite zu erstellen */
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-body {
-    background-color: var(--tea-green); /* Pastellblau */
-    background-image: linear-gradient(to right, var(--tea-green), #b3b7c6); /* Pastellblau */
-    color: #000; /* Schwarze Textfarbe */
-    margin: 0;
+
+/* we want the map to be the rest of the available height. */
+#map {
+    width: 100vw;
+    height: 93vh;
+    z-index: 0;
 }
 
-/* Stile für die Navbar */
-.navbar {
-    display: flex;
-    align-items: center; /* Zentriert die Kreise vertikal */
-    padding: 10px;
-    margin-bottom: 20px; /* Hinzugefügter Abstand nach unten */
-}
-
-.navbar *, .login-section * {
-    font-family: 'Montserrat', sans-serif;
-}
-
-a {
-    color: var(--grandeis-blue); /* Schwarze Textfarbe für Links */
-    text-decoration: none;
-    margin-left: 10px;
+/* the "ai-generated" preview of the place after greening. */
+.image-preview {
     position: relative;
 }
 
-a:hover {
-    text-decoration: underline;
+.overlaid-image {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+}
+
+
+
+/* navigation bar inside the header. */
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.navbar *,
+.login-section * {
+    font-family: 'Montserrat', sans-serif;
 }
 
 
 .login-section {
     display: flex;
     align-items: center;
-    margin-left: 10px;
-    margin-bottom: 20px;
+    padding: 10px;
 }
 
 
-.category_done {
-    filter: hue-rotate(120deg);
-}
 
-.category_in_planning {
-    filter: hue-rotate(60deg);
-}
-
-.category_low_potential {
-    filter: hue-rotate(200deg);
-}
-
-.category_middle_potential {
-    filter: hue-rotate(220deg);
-}
-
-.category_high_potential {
-    filter: hue-rotate(300deg);
-}
 
 .login-section input[type="text"],
 .login-section input[type="password"],
 .login-section button {
-    margin-right: 10px;
+    margin: 10px;
 }
 
 .login-section button {
@@ -173,8 +160,6 @@ a:hover {
     font: 14px Arial, Helvetica, sans-serif;
     background: white;
     background: rgba(255, 255, 255, 0.8);
-    /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
-    /*border-radius: 5px;*/
     line-height: 24px;
     color: #555;
 }
@@ -205,6 +190,28 @@ a:hover {
 }
 
 /* End Source */
+
+/* The categories inside the legend. */
+.category_done {
+    filter: hue-rotate(120deg);
+}
+
+.category_in_planning {
+    filter: hue-rotate(60deg);
+}
+
+.category_low_potential {
+    filter: hue-rotate(200deg);
+}
+
+.category_middle_potential {
+    filter: hue-rotate(220deg);
+}
+
+.category_high_potential {
+    filter: hue-rotate(300deg);
+}
+
 
 
 .flash-message {
