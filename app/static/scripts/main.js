@@ -1,6 +1,6 @@
 'use strict';
 
-const request_url = "http://localhost:8080";
+const request_url = "https://plantmi.hecke.xyz";
 
 const STEPHANSDOM = [48.208498, 16.373132];
 const map = L.map('map').setView(STEPHANSDOM, 17);

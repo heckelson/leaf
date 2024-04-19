@@ -18,5 +18,5 @@ RUN python -m pipenv run python create_db_schema.py -y
 RUN python -m pipenv run python fill_test_database.py
 
 # pipenv run waitress-serve --port 5005 --url-scheme 'https' --call app:create_app
-
 CMD ["python", "-m", "pipenv", "run", "waitress-serve", "--port", "5005", "--url-scheme", "'https'", "--call", "app:create_app"]
+
