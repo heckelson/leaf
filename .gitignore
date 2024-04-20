@@ -1,9 +1,8 @@
 .idea/
-.venv
-app/__pycache__
-app/blueprints/__pycache__
-/test.db
-test.db
-tests/__pycache__
-
+.venv/
+*/**/__pycache__
 node_modules/
+
+# important files
+.env
+test.db

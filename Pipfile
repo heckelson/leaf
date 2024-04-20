@@ -9,6 +9,7 @@ sqlalchemy = "*"
 bcrypt = "*"
 colorama = "*"
 waitress = "*"
+flask-cors = "*"
 
 [dev-packages]
 pytest = "*"

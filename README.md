@@ -3,6 +3,24 @@
 A prototype for a citizen participation application
 created over the course of a [hackathon at University of Vienna](http://web.archive.org/web/20230922082859/https://forschung.univie.ac.at/services/veranstaltungen-trainings/sonstige-veranstaltungen/hackathon/).
 
+# Big Project cleanup
+
+Aims to de-hackathon-ize the project by using proper tech. This is to have a presentable
+prototype.
+
+We're gonna try to follow this tutorial: https://marketsplash.com/how-to-integrate-flask-with-vue-js/
+
+## Task list:
+
+- [x] create vue project
+- [x] rebuild navbar
+- [x] integrate leaflet for the map
+- [ ] figure out login/logout
+- [ ] rebuild markers, popups, etc.
+- [ ] rebuild fake dono, voting, etc.
+
+---
+
 ## Run instructions
 
 ### Create a Python venv
