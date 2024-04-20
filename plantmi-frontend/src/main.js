@@ -1,4 +1,9 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 
-createApp(App).mount("#app");
+import VueCookies from "vue-cookies";
+
+const app = createApp(App);
+
+app.use(VueCookies, { expires: "never" });
+app.mount("#app");

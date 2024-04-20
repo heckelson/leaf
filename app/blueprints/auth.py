@@ -13,7 +13,10 @@ def logout():
         session.pop("username")
         flash("Logged out", FC.SUCCESS)
 
-    return redirect(url_for("index.index"))
+    resp = redirect(url_for("index.index"))
+    resp.delete_cookie("username")
+
+    return resp
 
 
 @bp.post("/login")
@@ -44,4 +47,7 @@ def login():
     else:
         flash("Wrong username or password!", FC.ERROR)
 
-    return redirect(url_for("index.index"))
+    resp = redirect(url_for("index.index"))
+    resp.set_cookie("username", provided_username)
+
+    return resp

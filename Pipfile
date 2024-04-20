@@ -16,6 +16,7 @@ pytest = "*"
 black = "*"
 pre-commit = "*"
 isort = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.11"

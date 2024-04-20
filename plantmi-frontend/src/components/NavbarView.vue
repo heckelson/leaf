@@ -19,42 +19,45 @@
         <a href="#">Impressum</a>
       </div>
 
-      <!--
-        TODO: Add v-if and v-else; if logged out show this, else show the username
-          and a logout field.
-      -->
+      <div class="navbar-container nav-elements" v-if="isUsernameCookieSet()">
+        <a href="/auth/logout">({{ getUsernameFromCookie() }}) Logout</a>
+      </div>
 
-      <div class="navbar-container nav-elements">
+      <div class="navbar-container nav-elements" v-else>
         <a href="#" @click="toggleLoginVisible()">Login</a>
       </div>
     </div>
 
-    <div class="navbar-container" id="login-field" ref="login_field">
-      <form action="/login" class="navbar-container">
-        <div><label>Username</label><input type="text" /></div>
-        <div><label>Password</label><input type="password" /></div>
-        <div><button type="submit">Login</button></div>
-      </form>
-    </div>
+    <LoginField ref="login_field" />
   </div>
 </template>
 
 <script>
+import { inject } from "vue";
+import LoginField from "./LoginField.vue";
+
 export default {
+  setup: function () {},
+  components: {
+    LoginField,
+  },
   data: function () {
     return {
-      login_is_visible: true, // TODO: change to false once done with styling
+      login_is_visible: false,
     };
   },
   methods: {
     toggleLoginVisible: function () {
       this.login_is_visible = !this.login_is_visible;
-
-      if (this.login_is_visible) {
-        this.$refs.login_field.style["display"] = "inherit";
-      } else {
-        this.$refs.login_field.style["display"] = "none";
-      }
+      this.$refs.login_field.setVisibility(this.login_is_visible);
+    },
+    isUsernameCookieSet: function () {
+      const $cookies = inject("$cookies");
+      return $cookies.isKey("username");
+    },
+    getUsernameFromCookie: function () {
+      const $cookies = inject("$cookies");
+      return $cookies.get("username");
     },
   },
 };
@@ -104,17 +107,5 @@ export default {
 .nav-elements a:hover {
   font-weight: 700;
   transform: translateY(-2px);
-}
-
-#login-field {
-  display: inherit;
-  /* TODO: change to 'none' once done with styling */
-
-  margin: 8px;
-  margin-top: 0;
-}
-
-#login-field input {
-  margin: 8px;
 }
 </style>
