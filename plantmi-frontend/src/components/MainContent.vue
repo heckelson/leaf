@@ -20,7 +20,7 @@ export default {
     const legend = L.control({ position: "bottomleft" });
     legend.onAdd = function () {
       let div = L.DomUtil.create("div", "legend");
-      div.innerHTML += "<h4>I am Legend</h4>";
+      div.innerHTML += "<h4>Legend</h4>";
       div.innerHTML +=
         '<i style="background: #e14b83"></i><span>Vienna today</span><br>';
       div.innerHTML +=

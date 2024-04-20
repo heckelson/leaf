@@ -1,12 +1,14 @@
 <template>
-  <div id="header" class="flex-row">
+  <div id="header">
     <div class="navbar">
       <div class="navbar-container">
-        <img
-          src="../assets/tree_logo_transparent.png"
-          alt=""
-          class="logo_head"
-        />
+        <a href="#">
+          <img
+            src="../assets/tree_logo_transparent.png"
+            alt=""
+            class="logo_head"
+          />
+        </a>
       </div>
 
       <div class="navbar-container" id="nav-elements">
@@ -54,7 +56,6 @@
 .logo_head {
   width: 40px;
   height: 40px;
-  object-fit: cover;
 
   margin: 8px;
 }
@@ -65,30 +66,34 @@
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
   font-family: "Montserrat", sans-serif;
-
+  font-weight: 500;
   border-bottom: 2px solid #256eff;
 }
 
 .navbar-container {
+  align-self: center;
+
   display: flex;
   flex-flow: row wrap;
-
   align-items: center;
   justify-content: center;
 }
 
-a {
-  transition: transform 100ms;
+#nav-elements a {
   color: var(--grandeis-blue);
   text-decoration: none;
 
   margin: 8px;
+
+  transition: all 150ms;
 }
 
 a:hover {
+  font-weight: 700;
+
   transform: translateY(-2px);
 }
 </style>

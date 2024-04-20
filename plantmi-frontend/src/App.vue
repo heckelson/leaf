@@ -17,6 +17,11 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf");
+}
+
 * {
   margin: 0;
   padding: 0;
